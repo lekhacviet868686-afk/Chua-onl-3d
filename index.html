@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#20170f"><title>Chùa Online – Không gian lễ Phật</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#120e0b;color:#fff;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+header{padding:15px 18px;background:#21170f;border-bottom:1px solid #705333;display:flex;justify-content:space-between;align-items:center;gap:10px}
+h1{font-size:20px;color:#f1d69a;margin:0}small,.muted{color:#cbb99b}.wrap{max-width:920px;margin:auto;padding:15px}
+.panel{background:#261d16;border:1px solid #705638;border-radius:18px;padding:17px;margin:13px 0}
+input,button{font:inherit;width:100%;padding:13px;border-radius:12px;margin:6px 0}
+input{background:#130f0c;border:1px solid #806746;color:#fff}button{border:0;background:#c49a58;color:#21170f;font-weight:700}
+button.alt{background:#51402d;color:#fff}.row{display:flex;gap:8px}.row>*{flex:1}
+.hidden{display:none}.msg{font-size:13px;color:#e9d6b5;line-height:1.5}
+#scene{height:360px;border-radius:15px;overflow:hidden;position:relative;background:linear-gradient(#18221d 0 35%,#392718 35% 100%);perspective:700px}
+.ceiling{position:absolute;left:0;right:0;top:0;height:110px;background:repeating-linear-gradient(0deg,#1a100b 0 12px,#382318 13px 17px);clip-path:polygon(0 0,100% 0,90% 100%,10% 100%)}
+.backwall{position:absolute;top:30%;left:17%;width:66%;height:38%;background:radial-gradient(ellipse,#7b4d28,#302017 68%);border:7px solid #4b3020}
+.buddha{position:absolute;top:30%;left:50%;transform:translateX(-50%);font-size:88px;filter:drop-shadow(0 7px 5px #0009)}
+.altar{position:absolute;top:64%;left:34%;width:32%;height:22px;background:#9b6c39;box-shadow:0 12px 0 #4c2d17}
+.floor{position:absolute;bottom:0;left:0;right:0;height:35%;background:repeating-linear-gradient(90deg,#2b1b12 0 45px,#49301d 46px 49px)}
+.pillar{position:absolute;top:25%;bottom:20%;width:18px;background:linear-gradient(90deg,#24130c,#76502e,#2b170d);border-radius:8px}.left{left:8%}.right{right:8%}
+.avatar{position:absolute;bottom:13%;font-size:34px;text-shadow:0 3px 5px #000}.a1{left:23%}.a2{right:23%}.a3{left:48%}
+.tools{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.tools button{font-size:14px;padding:12px 3px}
+@media(min-width:700px){.wrap{padding:24px}#scene{height:480px}}
+</style></head>
+<body>
+<header><div><h1>🙏 CHÙA ONLINE</h1><small>Không gian lễ Phật trực tuyến</small></div><small id="who">Khách</small></header>
+<main class="wrap">
+<section id="login" class="panel"><h2>Đăng nhập / Tạo tài khoản thử nghiệm</h2>
+<p class="msg">Đây là bản website khởi đầu để xuất bản lên Internet. Tài khoản hiện chỉ lưu trên trình duyệt của thiết bị này; chưa phải tài khoản trực tuyến dùng chung.</p>
+<input id="displayName" placeholder="Tên hiển thị trong chùa"><input id="email" type="email" placeholder="Email"><input id="password" type="password" placeholder="Mật khẩu (ít nhất 6 ký tự)">
+<div class="row"><button onclick="signup()">Tạo tài khoản</button><button class="alt" onclick="signin()">Đăng nhập</button></div><p id="authMsg" class="msg" aria-live="polite"></p></section>
+<section id="inside" class="hidden">
+<div class="panel"><div class="row" style="align-items:center"><div><h2 id="greet">Nam mô A Di Đà Phật</h2><small>Đại hùng bảo điện · Phòng mô phỏng</small></div><button class="alt" style="max-width:120px" onclick="logout()">Đăng xuất</button></div>
+<div id="scene"><div class="ceiling"></div><div class="backwall"></div><div class="buddha">🪷</div><div class="altar"></div><div class="floor"></div><i class="pillar left"></i><i class="pillar right"></i><span class="avatar a1">🧘</span><span class="avatar a2">🙏</span><span class="avatar a3">🧎</span></div>
+<h3>Hoạt động</h3><div class="tools"><button onclick="activity('Bạn đang chắp tay lễ Phật 🙏')">🙏 Lễ Phật</button><button onclick="activity('Bạn đang ngồi thiền 🧘')">🧘 Ngồi thiền</button><button onclick="activity('Nam mô A Di Đà Phật 📿')">📿 Niệm Phật</button></div><p id="actMsg" class="msg">Chào mừng bạn.</p></div>
+<div class="panel"><h3>Phòng chùa</h3><input id="roomName" value="Đại hùng bảo điện"><button onclick="document.getElementById('roomMsg').textContent='Bạn đã chọn phòng '+document.getElementById('roomName').value+'. Đây là phòng mô phỏng.'">Vào phòng</button><p id="roomMsg" class="msg"></p><p class="msg">Chức năng nhiều người cùng xuất hiện, trò chuyện trực tiếp và đồng bộ nhân vật sẽ được triển khai ở giai đoạn máy chủ.</p></div>
+</section>
+<section class="panel"><h3>Lộ trình phát triển</h3><p class="msg">Bản 0.3: website có thể xuất bản · Bản 0.4: tài khoản trực tuyến · Bản 0.5: phòng nhiều người thời gian thực · Bản 1.0: không gian chùa 3D hoàn chỉnh.</p></section>
+</main>
+<script>
+const el=id=>document.getElementById(id);
+function getUsers(){try{return JSON.parse(localStorage.getItem('chuaUsers')||'{}')}catch(e){return {}}}
+function enter(email){localStorage.setItem('chuaSession',email);render()}
+function signup(){let n=el('displayName').value.trim(),e=el('email').value.trim().toLowerCase(),p=el('password').value;if(!n||!e.includes('@')||p.length<6){el('authMsg').textContent='Nhập tên, email hợp lệ và mật khẩu ít nhất 6 ký tự.';return}let u=getUsers();if(u[e]){el('authMsg').textContent='Email đã đăng ký. Hãy đăng nhập.';return}u[e]={name:n,password:p};localStorage.setItem('chuaUsers',JSON.stringify(u));enter(e)}
+function signin(){let e=el('email').value.trim().toLowerCase(),p=el('password').value,u=getUsers();if(!u[e]||u[e].password!==p){el('authMsg').textContent='Email hoặc mật khẩu không đúng trên thiết bị này.';return}enter(e)}
+function logout(){localStorage.removeItem('chuaSession');render()}
+function render(){let e=localStorage.getItem('chuaSession'),u=getUsers();if(e&&u[e]){el('login').classList.add('hidden');el('inside').classList.remove('hidden');el('greet').textContent='Nam mô A Di Đà Phật, '+u[e].name;el('who').textContent=u[e].name}else{el('login').classList.remove('hidden');el('inside').classList.add('hidden');el('who').textContent='Khách'}}
+function activity(s){el('actMsg').textContent=s}render();
+</script></body></html>
